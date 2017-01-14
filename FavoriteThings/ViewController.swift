@@ -33,6 +33,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     print("user selected the row", indexPath);
+
+    performSegue(withIdentifier: "detailsSegue", sender: indexPath.row);
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    if (segue.identifier == "detailsSegue") {
+
+      let controller = segue.destination as! DetailsViewController;
+      let row = sender as! Int;
+      let favorite = favoriteThings[row];
+      controller.setFavorite(favorite);
+    }
+
   }
 
   // number of rows
